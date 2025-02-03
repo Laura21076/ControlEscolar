@@ -1,0 +1,105 @@
+﻿@page "/"
+
+@layout LoginLayout
+@using System.Net.Http.Json
+@using ControlEscolar.Layout
+@using System.Threading.Tasks
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient Http
+
+<head>
+    <link rel="stylesheet" href="css/Login.css?v=2">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+
+</head>
+
+<div class="login-container">
+    <div class="login-box">
+        <i class="bi bi-person-circle user-icon"></i> <!-- Ícono de usuario con Bootstrap Icons -->
+        <h2>Iniciar Sesión</h2>
+
+        <EditForm Model="@user" OnValidSubmit="@HandleLogin">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="input-group">
+                <label>Usuario:</label>
+                <InputText @bind-Value="user.Username" class="form-control" />
+                <ValidationMessage For="@(() => user.Username)" />
+            </div>
+
+            <div class="input-group">
+                <label>Contraseña:</label>
+                <InputText @bind-Value="user.Password" Type="password" class="form-control" />
+                <ValidationMessage For="@(() => user.Password)" />
+            </div>
+
+            <button type="submit" class="btn-login">Ingresar</button>
+
+            @if (loginError)
+            {
+                <div class="error-message">
+                    <p>Error: Usuario o contraseña incorrectos</p>
+                </div>
+            }
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private UserModel user = new UserModel();
+    private bool loginError = false;
+
+    // Método de login
+    private async Task HandleLogin()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/auth/login", user);
+
+            // Si la respuesta es exitosa, guardamos el token en el almacenamiento local o en un lugar seguro
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                var token = result?.Token;
+
+                if (!string.IsNullOrEmpty(token))
+                {
+                    // Aquí puedes guardar el token en el almacenamiento local o cookies para la autenticación
+                    // Ejemplo: localStorage.SetItemAsync("authToken", token);
+                    Console.WriteLine("Login exitoso");
+                }
+                else
+                {
+                    loginError = true;
+                }
+            }
+            else
+            {
+                loginError = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Manejar error en la solicitud
+            loginError = true;
+            Console.WriteLine($"Error en la solicitud de login: {ex.Message}");
+        }
+    }
+
+    public class UserModel
+    {
+        [Required(ErrorMessage = "El nombre de usuario es obligatorio.")]
+        public string Username { get; set; } = "";
+
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        public string Password { get; set; } = "";
+    }
+
+    public class LoginResponse
+    {
+        public string Token { get; set; } = string.Empty;
+    }
+}
+

@@ -1,0 +1,84 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Fondo de la página con degradado */
+body {
+    background: rgb(103,58,183);
+    background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(165,214,167,1) 50%, rgba(0,212,255,1) 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", serif;
+}
+
+h2 {
+    color: white;
+}
+
+/* Contenedor del login */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Caja del login */
+.login-box {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    background: rgba(255, 255, 255, 0.1); /* Fondo blanco semi-transparente */
+    backdrop-filter: blur(10px); /* Desenfoque para efecto de vidrio */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+}
+
+.user-icon {
+    font-size: 90px;
+    color: white;
+    display: block;
+    margin: 10px auto;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+    .input-group label {
+        display: block;
+        font-weight: bold;
+        color: white;
+    }
+
+    .input-group .form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+/* Botón de Login */
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    background: #1861ac;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .btn-login:hover {
+        background: #154c88;
+    }
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
