@@ -1,0 +1,98 @@
+﻿@page "/registro"
+@layout LoginLayout
+@using System.Net.Http.Json
+@using System.Threading.Tasks
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient Http
+@inject NavigationManager Navigation
+@inject AuthService AuthService
+using ControlEscolar.Models;
+
+<head>
+    <link rel="stylesheet" href="css/Registro.css">
+</head>
+
+<div class="register-container">
+    <h2>Registro de Usuario</h2>
+
+    @if (!string.IsNullOrEmpty(Mensaje))
+    {
+        <p class="error-message">@Mensaje</p>
+    }
+
+    <EditForm Model="@registroRequest" OnValidSubmit="HandleRegister">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-grid">
+            <div class="column">
+                <div class="input-group">
+                    <label>Matrícula:</label>
+                    <InputText @bind-Value="registroRequest.Matricula" class="form-control" />
+                    <ValidationMessage For="@(() => registroRequest.Matricula)" />
+                </div>
+
+                <div class="input-group">
+                    <label>Email:</label>
+                    <InputText @bind-Value="registroRequest.Email" class="form-control" />
+                    <ValidationMessage For="@(() => registroRequest.Email)" />
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="input-group">
+                    <label>Contraseña:</label>
+                    <InputText type="password" @bind-Value="registroRequest.Password" class="form-control" />
+                    <ValidationMessage For="@(() => registroRequest.Password)" />
+                </div>
+
+                <div class="input-group">
+                    <label>Rol:</label>
+                    <InputSelect @bind-Value="registroRequest.IdRol" class="form-control">
+                        <option value="">Seleccione un rol</option>
+                        @foreach (var rol in roles)
+                        {
+                            <option value="@rol.Id">@rol.Nombre</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => registroRequest.IdRol)" />
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn-register">Registrar</button>
+            <button type="button" class="btn-login" @onclick="IrALogin">Volver al Login</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private RegistroRequest registroRequest = new();
+    private List<Rol> roles = new();
+    private string Mensaje = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        roles = await AuthService.GetRolesAsync();
+    }
+
+    private async Task HandleRegister()
+    {
+        var resultado = await AuthService.Register(registroRequest);
+
+        if (resultado == "Registro exitoso.")
+        {
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            Mensaje = resultado;
+        }
+    }
+
+    private void IrALogin()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

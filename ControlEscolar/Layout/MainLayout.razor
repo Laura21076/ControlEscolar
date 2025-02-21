@@ -1,16 +1,27 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+﻿@inject AuthenticationStateProvider AuthenticationStateProvider
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+<AuthorizeView>
+    <Authorized>
+        <p>Bienvenido, @context.User.Identity?.Name</p>
+        <button @onclick="Logout">Cerrar Sesión</button>
+    </Authorized>
+    <NotAuthorized>
+        <p>No estás autenticado.</p>
+    </NotAuthorized>
+</AuthorizeView>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+@code {
+    private async Task Logout()
+    {
+        if (AuthenticationStateProvider is CustomAuthStateProvider authStateProvider)
+        {
+            authStateProvider.SetUserLoggedOut();
+        }
+        await Task.CompletedTask; // Evita la advertencia
+    }
+
+
+
+}
+
+

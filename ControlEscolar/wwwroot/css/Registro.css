@@ -1,0 +1,124 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* 🔹 Fondo con degradado */
+body {
+    background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(165,214,167,1) 50%, rgba(0,212,255,1) 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* 🔹 Contenedor principal */
+.register-container {
+    width: 100%;
+    max-width: 600px; /* Ajustado para mejor presentación */
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.25); /* Transparencia más equilibrada */
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 🔹 Diseño flexible del formulario */
+.form-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+/* 🔹 Columnas */
+.column {
+    width: 48%;
+}
+
+/* 🔹 Estilización de campos */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+    .input-group label {
+        font-weight: bold;
+        color: white;
+        margin-bottom: 5px;
+    }
+
+    .input-group .form-control,
+    .input-group select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+    }
+
+    /* 🔹 Ajuste especial para el select de roles */
+    .input-group select {
+        background: white;
+        cursor: pointer;
+    }
+
+/* 🔹 Botones */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+/* 🔹 Botón Registrar */
+.btn-register, .btn-login {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-register {
+    background-color: #007bff;
+    color: white;
+}
+
+    .btn-register:hover {
+        background-color: #0056b3;
+    }
+
+.btn-login {
+    background: #28a745;
+    color: white;
+}
+
+    .btn-login:hover {
+        background: #218838;
+    }
+
+/* 🔹 Mensajes de error y éxito */
+.error-message, .success-message {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 🔹 Mensajes de error alineados correctamente */
+.error-message {
+    color: #dc3545; /* Rojo */
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: left;
+}
+
+/* 🔹 Mensajes de éxito */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+}

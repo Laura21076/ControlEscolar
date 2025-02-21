@@ -1,21 +1,16 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Fondo de la página con degradado */
+/* 🔹 Fondo de la página con degradado */
 body {
-    background: rgb(103,58,183);
     background: linear-gradient(90deg, rgba(103,58,183,1) 0%, rgba(165,214,167,1) 50%, rgba(0,212,255,1) 100%);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Montserrat", serif;
+    font-family: "Montserrat", sans-serif;
 }
 
-h2 {
-    color: white;
-}
-
-/* Contenedor del login */
+/* 🔹 Contenedor del login */
 .login-container {
     width: 100%;
     max-width: 400px;
@@ -24,17 +19,18 @@ h2 {
     text-align: center;
 }
 
-/* Caja del login */
+/* 🔹 Caja del login con efecto glass */
 .login-box {
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
     text-align: center;
     width: 350px;
-    background: rgba(255, 255, 255, 0.1); /* Fondo blanco semi-transparente */
-    backdrop-filter: blur(10px); /* Desenfoque para efecto de vidrio */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra ligera */
+    background: rgba(255, 255, 255, 0.15); /* Transparencia ajustada */
+    backdrop-filter: blur(12px); /* Efecto vidrio */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* 🔹 Icono de usuario */
 .user-icon {
     font-size: 90px;
     color: white;
@@ -42,7 +38,7 @@ h2 {
     margin: 10px auto;
 }
 
-/* Inputs */
+/* 🔹 Estilización de inputs */
 .input-group {
     margin-bottom: 15px;
     text-align: left;
@@ -52,33 +48,68 @@ h2 {
         display: block;
         font-weight: bold;
         color: white;
+        margin-bottom: 5px;
     }
 
     .input-group .form-control {
         width: 100%;
         padding: 10px;
-        border-radius: 5px;
+        border-radius: 6px;
         border: none;
+        font-size: 16px;
     }
 
-/* Botón de Login */
+/* 🔹 Botón de Login */
 .btn-login {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background: #1861ac;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
+    transition: background 0.3s ease;
 }
 
     .btn-login:hover {
         background: #154c88;
     }
 
+/* 🔹 Mensajes de error */
 .error-message {
     color: red;
     text-align: center;
     margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 🔹 Estilos para el botón de registro */
+.register-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btn-register {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+    .btn-register:hover {
+        background-color: #0056b3;
+    }
+
+/* 🔹 Validaciones */
+.validation-message {
+    color: #dc3545;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
 }
